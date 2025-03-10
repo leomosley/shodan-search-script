@@ -55,11 +55,6 @@
         "version": "3.5.0"
     },
     {
-        "domain": "www.boletinhumanidades.unsa.edu.ar",
-        "url": "http://www.boletinhumanidades.unsa.edu.ar/wp-content/plugins/embedpress/readme.txt",
-        "version": "3.5.3"
-    },
-    {
         "domain": "ec2-52-206-21-208.compute-1.amazonaws.com",
         "url": "http://ec2-52-206-21-208.compute-1.amazonaws.com/wp-content/plugins/embedpress/readme.txt",
         "version": "3.6.3"

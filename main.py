@@ -2,6 +2,16 @@ import json
 import re
 import requests
 import socket
+import time
+import random
+
+HEADERS = {
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Referer": "https://www.google.com/",
+  "Connection": "keep-alive",
+}
+
 
 def format_ip(ip_int):
   """
@@ -96,7 +106,7 @@ def fetch_readme_content(domain):
   """
   url = f"http://{domain}/wp-content/plugins/embedpress/readme.txt"
   try:
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, headers=HEADERS, timeout=5)
     response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
     content = response.text
     version_match = re.search(r"Stable tag: ([\d.]+)", content)
@@ -129,6 +139,8 @@ def main():
   results = []
   
   for ip in ips:
+    time.sleep(random.uniform(2, 6))
+
     domain = reverse_dns_lookup(ip)
     if domain:
       url, version = fetch_readme_content(domain)
@@ -143,6 +155,7 @@ def main():
   # Save the results to output.json
   with open('output.json', 'w') as outfile:
     json.dump(results, outfile, indent=4)
+    print(f"Sites found: {len(results)}")
   print("Results saved to output.json")
 
 if __name__ == "__main__":
